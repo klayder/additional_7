@@ -3,12 +3,12 @@ module.exports = function solveSudoku(matrix) {
 var possibleValue={};
 var countZero;
 
-for(let t=0;t<1;t++){
+for(let t=0;t<2;t++){
 	//console.log(t);
 	lookPossibleValue(matrix);
 	//console.log(possibleValue);
 	findeSolution(possibleValue,matrix);
-	//console.log(matrix);
+	console.log(matrix);
 		
 }
 
@@ -44,7 +44,7 @@ function findeSolution(possibleValue,matrix){
 				
 				if(possibleValue[num].filter((item)=>item==i).length){
 						sameArgArr.push(num);
-						console.log(num+":"+possibleValue[num]);
+						//console.log(num+":"+possibleValue[num]);
 				}
 			});
 
@@ -87,7 +87,9 @@ function findeSolution(possibleValue,matrix){
 					for(let itemKey in tempObj){
 						if(tempObj[itemKey].length==1){
 							if( tempObj[itemKey] in objPossiblNumbs){
-								console.log("double");
+								console.log("double"+itemKey);
+								
+
 								//кикать одинаковые значения
 							} else {
 								objPossiblNumbs[tempObj[itemKey]] =itemKey;
@@ -128,8 +130,9 @@ function findeSolution(possibleValue,matrix){
 		console.log(objPossiblNumbs);
 		console.log("-----------")	
 	for(let itemKey in objPossiblNumbs){
-		console.log("solution finde! "+itemKey+" on position"+objPossiblNumbs[itemKey]);
+		console.log("solution finde! "+(   itemKey)+" on position"+objPossiblNumbs[itemKey]);
 			//добавить подстановку в поле
+			matrix[itemKey[0]][itemKey[1]]=objPossiblNumbs[itemKey];
 	}
 
 	objPossiblNumbs={};
