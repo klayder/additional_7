@@ -36,7 +36,7 @@ function findeSolution(possibleValue,matrix){
 				var clearList=[];
 				clearList.length=0;
 
-		
+	var objPossiblNumbs={};	
 	for(let i=1;i<10;i++){
 			console.log(i);
 			let sameArgArr=[];
@@ -49,6 +49,7 @@ function findeSolution(possibleValue,matrix){
 			});
 
 			//console.log("");
+			
 			for(let k=0;k<9;k++){
 
 				var sameFirstIndex=[];
@@ -62,7 +63,7 @@ function findeSolution(possibleValue,matrix){
 
 
 				if(sameFirstIndex.length>1){
-					console.log(sameFirstIndex);
+					//console.log(sameFirstIndex);
 					let tempObj={
 						"1":[],
 						"2":[],
@@ -81,6 +82,21 @@ function findeSolution(possibleValue,matrix){
 						//console.log("aaa"+possibleValue[num].filter((item)=>item!=i)+":"+num);
 					});
 					
+					
+
+					for(let itemKey in tempObj){
+						if(tempObj[itemKey].length==1){
+							if( tempObj[itemKey] in objPossiblNumbs){
+								console.log("double");
+								//кикать одинаковые значения
+							} else {
+								objPossiblNumbs[tempObj[itemKey]] =itemKey;
+							}	
+						} 
+						
+					}	
+							
+
 /*
 					for(let itemKey in tempObj){
 						if(tempObj[itemKey].length==1){
@@ -103,19 +119,25 @@ function findeSolution(possibleValue,matrix){
 				}
 				
 			}
-
 			
 			
 	}
+	
+
+		console.log("-----------")	
+		console.log(objPossiblNumbs);
+		console.log("-----------")	
+	for(let itemKey in objPossiblNumbs){
+		console.log("solution finde! "+itemKey+" on position"+objPossiblNumbs[itemKey]);
+			//добавить подстановку в поле
+	}
+
+	objPossiblNumbs={};
 	clearList.forEach(function(item){
-					delete possibleValue[item];
-				});
-
-
-/***********************************************************************/
-
-/************************************************************************/
+			delete possibleValue[item];
+	});
 }
+
 
 
 function lookPossibleValue(matrix){
